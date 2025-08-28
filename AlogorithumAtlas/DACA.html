@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="subb-header">
+        <nav>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav> 
+<div class="tex-box">
+    <h1>DIVIDE AND CONQUER ALGORITHMS</h1>
+    <p>In computer science, divide and conquer is an algorithm design paradigm. A divide-and-conquer algorithm recursively breaks down a problem into two or more sub-problems of the same or related type, until these become simple enough to be solved directly.</p>
+</div>
+     
+</section>
+<!---------------CODES--------------------> 
+<section class="codes">
+    
+    <h1>DAA ALGORITHM</h1>
+    <div class="row">
+        <div class="codes-col">
+        <h3>Quick Sort</h3>
+            <p> picks an element as pivot, and then it partitions the given array around the picked pivot element. In quick sort, a large array is divided into two arrays in which one holds values
+                that are smaller than the specified value (Pivot), and another array holds the values that are greater than the pivot.</p>
+            <a href="qs.html"  class="heree-bt">For More</a>
+        </div>
+        <div class="codes-col">
+        <h3>Merge Sort</h3>
+            <p> Divide the unsorted list into n sublists, each containing one element (a list of one element is considered sorted).Repeatedly merge sublists to produce new sorted sublists until there is only one sublist remaining. This will be the sorted list. 
+                </p>
+            <a href="ms.html"  class="heree-bt">For More</a>
+        </div>
+        <div class="codes-col">
+        <h3>Matrix Multiplication</h3>
+            <p> Strassen's Matrix Multiplication is the divide and conquer approach to solve the matrix multiplication problems. The usual matrix multiplication method multiplies each row with each column to achieve the product matrix. The time complexity taken by this approach is O(n3), since it takes two loops to multiply. </p>
+            <a href="mmul.html"  class="heree-bt">For More</a>
+        </div>
+    </div>    
+    
+    </section>
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    

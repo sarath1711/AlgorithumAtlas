@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav> 
+<div class="tex-box">
+    <h1>ALGORITHMS</h1>
+    <p>In mathematics and computer science, an algorithm is a finite sequence of rigorous instructions, typically used to solve a class of specific problems or to perform a computation.<br> Algorithms are used as specifications for performing calculations and data processing.</p>
+</div>
+     
+</section>
+<!---------------CODES--------------------> 
+<section class="codes">
+    
+    <h1>DAA ALGORITHM</h1>
+    
+    <div class="row">
+        <div class="codes-col">
+        <h3>STRING MATCHING ALGORITHMS</h3>
+        <p>String matching algorithms are computational techniques used to find substrings within larger texts. Common algorithms include Brute-Force, KMP, Boyer-Moore, Rabin-Karp, Aho-Corasick, and more.</p>
+            <a href="smp.html"  class="heree-bt">For More</a>
+        </div>
+        <div class="codes-col">
+            <h3>DIVIDE AND CONQUER ALGORITHMS</h3>
+            <p>Divide and conquer algorithms break a problem into smaller subproblems, solve them, and then combine the results. Examples include Merge Sort and Quick Sort for sorting, and Binary Search for searching.</p>
+        
+            <a href="DACA.html" class="heree-bt">For More</a>
+        </div>
+        <div class="codes-col">
+        <h3>DIVIDE AND CONQUER ALGORITHMS</h3>
+            <p> A greedy algorithm is an approach for solving a problem by selecting the best option available at the moment. It doesn't worry whether the current best result will bring the overall optimal result. The algorithm never reverses the earlier decision even if the choice is wrong. It works in a top-down approach.</p>
+        </div>
+    </div>    
+    </section>
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    

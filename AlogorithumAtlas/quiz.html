@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+</head>
+<body>
+    <section class="quiz-section">
+        <h1>Quiz: Rabin-Karp String Matching</h1>
+
+        <!-- Quiz Questions -->
+        <form id="quizForm">
+            <div class="question">
+                <p>1. What is the time complexity of the Rabin-Karp algorithm?</p>
+                <input type="radio" id="q1a" name="q1" value="O(n)">
+                <label for="q1a">O(n)</label><br>
+                <input type="radio" id="q1b" name="q1" value="O(n*m)">
+                <label for="q1b">O(n*m)</label><br>
+                <input type="radio" id="q1c" name="q1" value="O(n^2)">
+                <label for="q1c">O(n^2)</label><br>
+            </div>
+
+            <div class="question">
+                <p>2. What is the purpose of the rolling hash in the Rabin-Karp algorithm?</p>
+                <input type="radio" id="q2a" name="q2" value="To update the hash value efficiently as the window slides">
+                <label for="q2a">To update the hash value efficiently as the window slides</label><br>
+                <input type="radio" id="q2b" name="q2" value="To compare characters one by one">
+                <label for="q2b">To compare characters one by one</label><br>
+                <input type="radio" id="q2c" name="q2" value="To store the hash values of all text windows">
+                <label for="q2c">To store the hash values of all text windows</label><br>
+            </div>
+
+            <div class="question">
+                <p>3. How does Rabin-Karp handle hash collisions?</p>
+                <input type="radio" id="q3a" name="q3" value="By using a prime modulo">
+                <label for="q3a">By using a prime modulo</label><br>
+                <input type="radio" id="q3b" name="q3" value="By checking character-by-character when hashes match">
+                <label for="q3b">By checking character-by-character when hashes match</label><br>
+                <input type="radio" id="q3c" name="q3" value="By randomly choosing a new hash function">
+                <label for="q3c">By randomly choosing a new hash function</label><br>
+            </div>
+
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
+
+        <!-- Result Section -->
+        <div id="resultContainer"></div>
+    </section>
+
+    <script>
+        function submitQuiz() {
+            // Get user answers
+            let score = 0;
+            if (document.querySelector('input[name="q1"]:checked') && document.querySelector('input[name="q1"]:checked').value === 'O(n*m)') {
+                score++;
+            }
+            if (document.querySelector('input[name="q2"]:checked') && document.querySelector('input[name="q2"]:checked').value === 'To update the hash value efficiently as the window slides') {
+                score++;
+            }
+            if (document.querySelector('input[name="q3"]:checked') && document.querySelector('input[name="q3"]:checked').value === 'By using a prime modulo') {
+                score++;
+            }
+
+            // Display result
+            let resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = `<h2>Your Score: ${score} out of 3</h2>`;
+        }
+    </script>
+</body>
+</html>

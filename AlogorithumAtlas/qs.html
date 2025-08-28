@@ -1,0 +1,311 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+<section class="nsalo">
+    <h2>Quick Sort</h2>
+    <div class="nsa-clo">
+    <h2 >Code</h2>
+    <pre class="new">
+def partition(array, low, high):
+    pivot = array[high]
+    i = low - 1
+    for j in range(low, high):
+        if array[j] <= pivot:
+            i = i + 1
+            (array[i], array[j]) = (array[j], array[i])
+
+    (array[i + 1], array[high]) = (array[high], array[i + 1])
+
+    return i + 1
+
+def quicksort(array, low, high):
+    if low < high:
+        pi = partition(array, low, high)
+
+        quicksort(array, low, pi - 1)
+        quicksort(array, pi + 1, high)
+
+if __name__ == '__main':
+    array = list()
+    N = eval(input("Enter the Value of Array:"))
+    N = len(array)
+    for i in range(N):
+        n = eval(input("Enter the Value"))
+        array.append(n)
+
+    quicksort(array, 0, N - 1)
+    print('Sorted array:')
+    for x in array:
+        print(x, end=" ")
+
+
+
+    </pre>
+
+
+    
+    
+
+
+    </div>
+    
+   <!----------RunIng Code------------>
+   <style>
+
+    /* Sorting Section */
+    /* Sorting Section */
+.sorting-container {
+    margin-top: 200px;
+}
+
+/* Graph Container (Fixed Size) */
+.bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 500px;  /* Fixed max height */
+    margin-top: 20px;
+    border: 10px solid #ddd;
+    padding: 20px;
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Bars (Dynamic Height) */
+.bar {
+    width: 50px; /* Fixed width */
+    margin: 5px;
+    background-color: steelblue;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+  
+
+</style>
+
+<!-- Sorting Visualization Section -->
+<div class="sorting-container">
+    <p>Enter numbers separated by commas (e.g., 10, 5, 7, 3, 9):</p>
+    <input type="text" id="numberInput">
+    <button onclick="startSorting()">Sort Array</button>
+    <div class="bar-container" id="barContainer"></div>
+</div>
+
+
+<!-- JavaScript for Sorting -->
+<script>
+    let delay = 500;  // Delay in milliseconds
+
+    function startSorting() {
+        let input = document.getElementById("numberInput").value;
+        let array = input.split(",").map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+
+        if (array.length === 0) {
+            alert("Please enter valid numbers!");
+            return;
+        }
+
+        displayBars(array);
+        quickSort(array, 0, array.length - 1);
+    }
+
+    function displayBars(array) {
+    let container = document.getElementById("barContainer");
+    container.innerHTML = "";
+
+    let maxHeight = 500; // Max height of the container
+    let maxNumber = Math.max(...array); // Get the highest number
+
+    array.forEach(value => {
+        let bar = document.createElement("div");
+        bar.classList.add("bar");
+
+        // Dynamically adjust height within limits
+        let heightRatio = (value / maxNumber) * maxHeight;
+        bar.style.height = `${heightRatio}px`;
+
+        bar.textContent = value;
+        container.appendChild(bar);
+    });
+}
+
+
+    async function quickSort(array, low, high) {
+        if (low < high) {
+            let pi = await partition(array, low, high);
+            await quickSort(array, low, pi - 1);
+            await quickSort(array, pi + 1, high);
+        }
+    }
+
+    async function partition(array, low, high) {
+        let pivot = array[high];
+        let i = low - 1;
+
+        for (let j = low; j < high; j++) {
+            if (array[j] <= pivot) {
+                i++;
+                [array[i], array[j]] = [array[j], array[i]];
+                displayBars(array);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+
+        [array[i + 1], array[high]] = [array[high], array[i + 1]];
+        displayBars(array);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return i + 1;
+    }
+</script>
+
+<!-- JavaScript for Navigation Menu -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+
+
+   </div>
+
+   
+    <div class="exp">
+        <h2>EXPLANTION</h2>
+
+<h3> Quick Sort Algorithm </h3>
+
+- The code defines two functions: `partition` and `quicksort` to implement the Quick Sort algorithm.<br>
+- Quick Sort is a divide-and-conquer algorithm that works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.<br>
+- The `partition` function takes an array, a low index, and a high index as input parameters.<br>
+- It selects the last element of the array as the pivot.<br>
+- It then iterates through the array from the low index to the high index (excluding the pivot).<br>
+- If an element is less than or equal to the pivot, it increments the `i` variable and swaps the element at index `i` with the element at index `j`.<br>
+- Finally, it places the pivot element in its correct position by swapping it with the element at index `i + 1`.<br>
+- The function returns the index of the pivot element after partitioning.<br>
+
+<h3>Quicksort Function</h3>
+
+- The `quicksort` function takes an array, a low index, and a high index as input parameters.<br>
+- It recursively sorts the sub-arrays before and after the pivot element.<br>
+- If the low index is less than the high index, it calls the `partition` function to get the index of the pivot element.<br>
+- It then recursively calls `quicksort` on the sub-array to the left of the pivot (elements less than the pivot) and the sub-array to the right of the pivot (elements greater than the pivot).<br>
+
+<h3>Main Function</h3> 
+
+- The main function reads input from the user to create an array.<br>
+- It then calls the `quicksort` function to sort the array in ascending order.<br>
+- Finally, it prints the sorted array.<br>
+
+           
+        
+    </div>
+    
+    </section>
+
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>  
+<div class="quiz-container">
+    <h3>For Quiz</h3>
+    <ul>
+        <li><a href="quiz1.html"><button>Quiz</button></a></li>
+    </ul>
+</div>   
+</body>
+</html>
+    
+
+
+
+<!-- <body>
+    <h2>Quick Sort Visualizer</h2>
+    <p>Enter numbers separated by commas (e.g., 5,3,8,1,7):</p>
+    <input type="text" id="numberInput">
+    <button onclick="startSorting()">Sort</button>
+    <div class="bar-container" id="barContainer"></div>
+
+    <script>
+        let delay = 500;
+
+        function startSorting() {
+            let input = document.getElementById("numberInput").value;
+            let array = input.split(",").map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+            displayBars(array);
+            quickSort(array, 0, array.length - 1);
+        }
+
+        function displayBars(array) {
+            let container = document.getElementById("barContainer");
+            container.innerHTML = "";
+            array.forEach(value => {
+                let bar = document.createElement("div");
+                bar.classList.add("bar");
+                bar.style.height = `${value * 5}px`;
+                bar.textContent = value;
+                container.appendChild(bar);
+            });
+        }
+
+        async function quickSort(array, low, high) {
+            if (low < high) {
+                let pi = await partition(array, low, high);
+                await quickSort(array, low, pi - 1);
+                await quickSort(array, pi + 1, high);
+            }
+        }
+
+        async function partition(array, low, high) {
+            let pivot = array[high];
+            let i = low - 1;
+
+            for (let j = low; j < high; j++) {
+                if (array[j] <= pivot) {
+                    i++;
+                    [array[i], array[j]] = [array[j], array[i]];
+                    displayBars(array);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+
+            [array[i + 1], array[high]] = [array[high], array[i + 1]];
+            displayBars(array);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return i + 1;
+        }
+    </script> -->

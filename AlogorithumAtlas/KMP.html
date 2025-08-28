@@ -1,0 +1,196 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+<section class="nsalo">
+    <h1> KMP String Searching</h1>
+    <div class="nsa-clo">
+    <h2>Code</h2>
+        <p>
+
+def kmp_search(text, pattern):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  n = len(text)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m = len(pattern)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lps = compute_lps(pattern)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = 0  # Index for text[]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j = 0  # Index for pattern[]<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while i < n:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if pattern[j] == text[i]:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if j == m:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Pattern found at index", i - j)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j = lps[j - 1]<br>
+
+        # Mismatch after j matches<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif i < n and pattern[j] != text[i]:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if j != 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j= lps[j - 1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>
+
+def computeLPSArray(pat, M, lps):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    lps[0] = 0 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    i = 1<br>
+    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while i < M:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        if pat[i] == pat[len]:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  lps[i] = len<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           if len != 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;len = lps[len-1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lps[i] = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>
+txt = input ("Enter text")<br>
+pat = input ("Enter pattern")<br>
+KMPSearch (pat, txt)<br>
+
+        </p>
+    </div>
+
+ <!----------RunIng Code------------>
+ <div class="nas">
+    <form onsubmit="return false">
+        <label for="text">Text:</label><br>
+        <input type="text" id="text" name="text" ><br>
+        <label for="pattern">Pattern:</label><br>
+        <input type="text" id="pattern" name="pattern" ><br>
+        <input type="submit" id="btn-form" value="Submit" onclick="submitForm()">
+    </form>
+
+    <p>Output:</p>
+    <p id='output'></p>
+
+    <script>
+        function submitForm() {
+            var text = document.getElementById("text").value;
+            var pattern = document.getElementById("pattern").value;
+            var output = document.getElementById("output");
+            
+            function naiveStringMatching(text, pattern) {
+                var n = text.length;
+                var m = pattern.length;
+                var matches = [];
+
+                for (var i = 0; i <= n - m; i++) {
+                    var j = 0;
+                    while (j < m && text.charAt(i + j) == pattern.charAt(j)) {
+                        j++;
+                    }
+
+                    if (j == m) {
+                        matches.push(i);
+                    }
+                }
+
+                if (matches.length > 0) {
+                    output.textContent = "Pattern found at indices: " + matches.join(', ');
+                } else {
+                    output.textContent = "Pattern not found.";
+                }
+            }
+            naiveStringMatching(text, pattern);
+        }
+    </script>
+    </p>
+    
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="exp">
+        <h2>EXPLANTION</h2>
+        <p>
+
+This function computes the Longest Prefix Suffix (LPS) array, which is also known as the failure function, for the given pattern.
+It initializes an array lps of the same length as the pattern and sets all elements to 0.
+It uses two pointers, i and length, to iterate through the pattern from left to right.
+The while loop runs until i reaches the end of the pattern.
+Inside the loop:
+If the characters at pattern[i] and pattern[length] match, it means we have found a prefix that is also a suffix, so we increment length and set lps[i] to length.
+If the characters do not match and length is not 0, it means we backtrack to find a shorter prefix that is also a suffix by updating length to lps[length-1].
+If the characters do not match and length is already 0, we cannot find a shorter prefix that is also a suffix, so we set lps[i] to 0 and increment i.
+The function returns the lps array once it's computed.
+kmp_search(text, pattern):
+
+This function performs the Knuth-Morris-Pratt (KMP) search for the pattern within the text.
+It takes two arguments: text (the larger string to search in) and pattern (the substring to search for).
+It starts with two pointers, i for the text and j for the pattern, both initialized to 0.
+It enters a while loop that runs until i reaches the end of the text.
+Inside the loop:
+If the characters at text[i] and pattern[j] match, it means a potential match has been found, so both i and j are incremented.
+If j reaches the end of the pattern, it means a complete match has been found, so the function prints the index where the match starts (usually i - j).
+If the characters do not match and j is not at the beginning of the pattern, it means there's a partial match. We use the LPS array to determine how many characters in the pattern can be safely skipped in the text by updating j to lps[j-1].
+If the characters do not match and j is at the beginning of the pattern, it means we should increment i to continue searching.
+Example usage:
+
+The code includes an example at the bottom where it defines a text and a pattern to search for.
+It calls the kmp_search function with these inputs.
+When you run the code, it will find and print the indices where the pattern is found in the text.
+The KMP algorithm's efficiency comes from its ability to avoid unnecessary character comparisons by utilizing the LPS (failure) array to efficiently skip portions of the text.
+        </p>
+        
+    </div>
+    
+    </section>
+
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    

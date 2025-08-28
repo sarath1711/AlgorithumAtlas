@@ -1,0 +1,243 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+<section class="nsalo">
+    <h2>Merge Sort</h2>
+    <div class="nsa-clo">
+    <h2 >Code</h2>
+    <pre class="new">
+def mergeSort(arr):
+    if len(arr) > 1:
+        mid = len(arr)//2
+
+        # Dividing the array elements
+        L = arr[:mid]
+
+        # Into 2 halves
+        R = arr[mid:]
+
+        # Sorting the first half
+        mergeSort(L)
+
+        # Sorting the second half
+        mergeSort(R)
+
+        i = j = k = 0
+
+        # Copy data to temp arrays L[] and R[]
+        while i < len(L) and j < len(R):
+            if L[i] <= R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        # Checking if any element was left
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+
+# Code to print the list
+def printList(arr):
+    for i in range(len(arr)):
+        print(arr[i], end=" ")
+    print()
+
+# Driver Code
+if __name__ == '__main__':
+    arr = [12, 11, 13, 5, 6, 7]
+    print("Given array is")
+    printList(arr)
+    mergeSort(arr)
+    print("\nSorted array is ")
+    printList(arr)
+</pre>
+       
+    
+<style>
+    /* Sorting Container */
+    .sorting-container {
+        margin-top: 50px;
+    }
+
+    /* Graph Container (Fixed Size) */
+    .bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 400px;  /* Fixed max height */
+        margin-top: 20px;
+        border: 2px solid #ddd;
+        padding: 10px;
+        overflow: hidden; /* Prevent overflow */
+    }
+
+    /* Bars (Dynamic Height) */
+    .bar {
+        width: 30px; /* Fixed width */
+        margin: 3px;
+        background-color: steelblue;
+        text-align: center;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+
+
+   
+
+
+
+
+
+
+    </div>
+   <!----------RunIng Code------------>
+   <div class="sorting-container">
+    <p>Enter numbers separated by commas (e.g., 10, 5, 7, 3, 9):</p>
+    <input type="text" id="numberInput">
+    <button onclick="startSorting()">Sort Array</button>
+
+    <div class="bar-container" id="barContainer"></div>
+</div>
+
+    <script>
+        let delay = 500;  // Delay in milliseconds
+
+        function startSorting() {
+            let input = document.getElementById("numberInput").value;
+            let array = input.split(",").map(num => parseInt(num.trim())).filter(num => !isNaN(num));
+
+            if (array.length === 0) {
+                alert("Please enter valid numbers!");
+                return;
+            }
+
+            displayBars(array);
+            mergeSort(array, 0, array.length - 1);
+        }
+
+        function displayBars(array) {
+            let container = document.getElementById("barContainer");
+            container.innerHTML = "";
+
+            let maxHeight = 400; // Fixed container height
+            let maxNumber = Math.max(...array) || 1; // Avoid division by zero
+
+            array.forEach(value => {
+                let bar = document.createElement("div");
+                bar.classList.add("bar");
+
+                // Dynamically adjust height within limits
+                let heightRatio = (value / maxNumber) * maxHeight;
+                bar.style.height = `${heightRatio}px`;
+
+                bar.textContent = value;
+                container.appendChild(bar);
+            });
+        }
+
+        async function mergeSort(arr, left, right) {
+            if (left < right) {
+                let mid = Math.floor((left + right) / 2);
+
+                await mergeSort(arr, left, mid);
+                await mergeSort(arr, mid + 1, right);
+                await merge(arr, left, mid, right);
+            }
+        }
+
+        async function merge(arr, left, mid, right) {
+            let leftArr = arr.slice(left, mid + 1);
+            let rightArr = arr.slice(mid + 1, right + 1);
+
+            let i = 0, j = 0, k = left;
+
+            while (i < leftArr.length && j < rightArr.length) {
+                if (leftArr[i] <= rightArr[j]) {
+                    arr[k] = leftArr[i];
+                    i++;
+                } else {
+                    arr[k] = rightArr[j];
+                    j++;
+                }
+                k++;
+                displayBars(arr);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+
+            while (i < leftArr.length) {
+                arr[k] = leftArr[i];
+                i++;
+                k++;
+                displayBars(arr);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+
+            while (j < rightArr.length) {
+                arr[k] = rightArr[j];
+                j++;
+                k++;
+                displayBars(arr);
+                await new Promise(resolve => setTimeout(resolve, delay));
+            }
+        }
+    </script>
+
+
+   </div>
+
+
+    <div class="exp">
+        <h2>EXPLANTION</h2>
+        <p> Divide the unsorted list into n sublists, each containing one element (a list of one element is considered sorted).Repeatedly merge 
+            sublists to produce new sorted sublists until there is only one sublist remaining. This will be the sorted list. 
+            
+        </p>
+           
+        
+    </div>
+    
+    </section>
+
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    

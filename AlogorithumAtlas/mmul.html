@@ -1,0 +1,211 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">CONTACT</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+<section class="nsalo">
+    <h2>Matrix Multiplication</h2>
+    <div class="nsa-clo">
+    <h2 >Code</h2>
+    <pre class="new">
+import numpy as np
+
+def strassen_matrix_multiply(A, B):
+    # Base case: if the matrices are 1x1, just return their product
+    if len(A) == 1:
+        return A * B
+
+    # Split the matrices into four equal-sized submatrices
+    n = len(A) // 2
+    A11 = A[:n, :n]
+    A12 = A[:n, n:]
+    A21 = A[n:, :n]
+    A22 = A[n:, n:]
+
+    B11 = B[:n, :n]
+    B12 = B[:n, n:]
+    B21 = B[n:, :n]
+    B22 = B[n:, n:]
+
+    # Calculate the seven products recursively
+    M1 = strassen_matrix_multiply (A11 + A22, B11 + B22)
+    M2 = strassen_matrix_multiply (A21 + A22, B11)
+    M3 = strassen_matrix_multiply (A11, B12 - B22)
+    M4 = strassen_matrix_multiply (A22, B21 - B11)
+    M5 = strassen_matrix_multiply (A11 + A12, B22)
+    M6 = strassen_matrix_multiply (A21 - A11, B11 + B12)
+    M7 = strassen_matrix_multiply (A12 - A22, B21 + B22)
+
+    # Calculate the four quadrants of the result matrix
+    C11 = M1 + M4 - M5 + M7
+    C12 = M3 + M5
+    C21 = M2 + M4
+    C22 = M1 - M2 + M3 + M6
+
+    # Combine the four quadrants to get the final result
+    result = np.vstack((np.hstack((C11, C12)), np.hstack((C21, C22))))
+
+    return result
+
+# Example usage
+A = np.array([[8, 10], [5, 4]])
+B = np.array([[3, 8], [1, 2]])
+result = strassen_matrix_multiply (A, B)
+print(result)
+</pre>
+
+
+<style>
+    .matrix-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    .matrix {
+        display: grid;
+        gap: 5px;
+        padding: 10px;
+        background: #f0f0f0;
+        border-radius: 10px;
+    }
+    .cell {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: steelblue;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    .result {
+        background: #ff9800;
+    }
+</style>
+   
+
+
+
+
+
+
+    </div>
+   <!----------RunIng Code------------>
+   <p>Enter Matrix A (comma-separated rows, semicolon-separated columns):</p>
+    <input type="text" id="matrixA" placeholder="Example: 1,2;3,4">
+    
+    <p>Enter Matrix B (comma-separated rows, semicolon-separated columns):</p>
+    <input type="text" id="matrixB" placeholder="Example: 5,6;7,8">
+
+    <br><br>
+    <button onclick="multiplyMatrices()">Multiply Matrices</button>
+
+    <div class="matrix-container">
+        <div id="matrixAContainer"></div>
+        <div id="matrixBContainer"></div>
+        <div id="matrixResultContainer"></div>
+    </div>
+
+    <script>
+        function parseMatrix(input) {
+            return input.split(";").map(row => row.split(",").map(num => parseInt(num.trim())));
+        }
+
+        function displayMatrix(matrix, containerId, isResult = false) {
+            let container = document.getElementById(containerId);
+            container.innerHTML = "";
+
+            if (!matrix.length) return;
+
+            let rows = matrix.length;
+            let cols = matrix[0].length;
+            container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            container.classList.add("matrix");
+
+            matrix.forEach(row => {
+                row.forEach(value => {
+                    let cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    if (isResult) cell.classList.add("result");
+                    cell.textContent = value;
+                    container.appendChild(cell);
+                });
+            });
+        }
+
+        async function multiplyMatrices() {
+            let matrixA = parseMatrix(document.getElementById("matrixA").value);
+            let matrixB = parseMatrix(document.getElementById("matrixB").value);
+
+            if (matrixA[0].length !== matrixB.length) {
+                alert("Matrix multiplication is not possible! Columns of A must match rows of B.");
+                return;
+            }
+
+            displayMatrix(matrixA, "matrixAContainer");
+            displayMatrix(matrixB, "matrixBContainer");
+
+            let rowsA = matrixA.length, colsA = matrixA[0].length;
+            let rowsB = matrixB.length, colsB = matrixB[0].length;
+            let result = Array.from({ length: rowsA }, () => Array(colsB).fill(0));
+
+            for (let i = 0; i < rowsA; i++) {
+                for (let j = 0; j < colsB; j++) {
+                    for (let k = 0; k < colsA; k++) {
+                        result[i][j] += matrixA[i][k] * matrixB[k][j];
+                    }
+                    displayMatrix(result, "matrixResultContainer", true);
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Animation delay
+                }
+            }
+        }
+    </script>
+
+   </div>
+
+
+    <div class="exp">
+        <h2>EXPLANTION</h2>
+        <p> Strassen's Matrix Multiplication is the divide and conquer approach to solve the matrix multiplication problems. The usual matrix multiplication method multiplies each row with each column to achieve the product matrix. 
+            The time complexity taken by this approach is O(n3), since it takes two loops to multiply. 
+            
+        </p>
+           
+        
+    </div>
+    
+    </section>
+
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    

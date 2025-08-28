@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+    <na>
+        <a href="index.html"><img src="15.png" alt="Logo"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                <li><a href="">CONTACT</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </na>
+</section>
+
+<section class="quiz-section">
+    <h1>Quiz: Algorithms - Quick Sort</h1>
+
+    <!-- Quiz Questions -->
+    <form id="quizForm">
+        <!-- Quick Sort Questions -->
+        <div class="question">
+            <p>1. What is the worst-case time complexity of Quick Sort?</p>
+            <input type="radio" id="q1a" name="q1" value="O(n)">
+            <label for="q1a">O(n)</label><br>
+            <input type="radio" id="q1b" name="q1" value="O(n log n)">
+            <label for="q1b">O(n log n)</label><br>
+            <input type="radio" id="q1c" name="q1" value="O(n^2)">
+            <label for="q1c">O(n^2)</label><br>
+        </div>
+
+        <div class="question">
+            <p>2. What is the best-case time complexity of Quick Sort?</p>
+            <input type="radio" id="q2a" name="q2" value="O(n)">
+            <label for="q2a">O(n)</label><br>
+            <input type="radio" id="q2b" name="q2" value="O(n log n)">
+            <label for="q2b">O(n log n)</label><br>
+            <input type="radio" id="q2c" name="q2" value="O(n^2)">
+            <label for="q2c">O(n^2)</label><br>
+        </div>
+
+        <div class="question">
+            <p>3. What is the purpose of the pivot in Quick Sort?</p>
+            <input type="radio" id="q3a" name="q3" value="To divide the array into smaller subarrays">
+            <label for="q3a">To divide the array into smaller subarrays</label><br>
+            <input type="radio" id="q3b" name="q3" value="To check if the array is sorted">
+            <label for="q3b">To check if the array is sorted</label><br>
+            <input type="radio" id="q3c" name="q3" value="To compute the total number of elements in the array">
+            <label for="q3c">To compute the total number of elements in the array</label><br>
+        </div>
+
+       
+
+        <button type="button" onclick="submitQuiz()">Submit</button>
+    </form>
+
+    <!-- Result Section -->
+    <div id="resultContainer"></div>
+</section>
+
+<script>
+    function submitQuiz() {
+        // Get user answers
+        let score = 0;
+
+        // Quick Sort Questions
+        if (document.querySelector('input[name="q1"]:checked') && document.querySelector('input[name="q1"]:checked').value === 'O(n^2)') {
+            score++;
+        }
+        if (document.querySelector('input[name="q2"]:checked') && document.querySelector('input[name="q2"]:checked').value === 'O(n log n)') {
+            score++;
+        }
+        if (document.querySelector('input[name="q3"]:checked') && document.querySelector('input[name="q3"]:checked').value === 'To divide the array into smaller subarrays') {
+            score++;
+        }
+
+
+        // Display result
+        let resultContainer = document.getElementById("resultContainer");
+        resultContainer.innerHTML = `<h2>Your Score: ${score} out of 3</h2>`;
+    }
+</script>
+
+</body>
+</html>

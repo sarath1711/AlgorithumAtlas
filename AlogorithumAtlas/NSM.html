@@ -1,0 +1,180 @@
+<html>
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0 ">
+<title>All In One Algorithm</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+<section class="headr">
+        <na>
+            <a href="index.html"><img src="15.png"      ></a>
+            <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+             <ul>
+                 <li><a href="index.html">HOME</a></li>
+                 <li><a href="ALGORITHMS.html">ALGORITHMS</a></li>
+                 <li><a href="">COMPILER</a></li>
+                </ul>
+            </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+        </na>
+    </section>
+<section class="nsalo">
+    <h2> Naïve String Matching</h2>
+    <div class="nsa-clo">
+    <h2 >Code</h2>
+    <p class="pa">
+        pattern = input("Enter the pattern:")<br>
+            text=input("Enter the text: ")<br>
+            n = len(text)<br>
+            m = len(pattern)<br>
+              for i in range(n - m + 1):<br>
+            &nbsp;&nbsp;j = 0<br>
+            &nbsp;&nbsp;while  j < m and text[i + j] == pattern[j]: <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j += 1<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;&nbsp;j == m:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"patter is found at {i}")<br>
+
+      </p>  
+    </div>
+
+    <style>
+        input {
+            width: 300px;
+            padding: 5px;
+            margin: 5px;
+        }
+        button {
+            padding: 8px 15px;
+            background: steelblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .result-container {
+            margin-top: 20px;
+            font-size: 20px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+        }
+        .highlight {
+            background: yellow;
+            color: black;
+            font-weight: bold;
+            padding: 2px;
+            border-radius: 4px;
+        }
+    </style>
+   <!----------RunIng Code------------>
+   <h2>Naïve String Matching Visualization</h2>
+
+    <p>Enter the main text:</p>
+    <input type="text" id="textInput" placeholder="Enter the main text here">
+
+    <p>Enter the pattern to search:</p>
+    <input type="text" id="patternInput" placeholder="Enter the pattern">
+
+    <br><br>
+    <button onclick="startMatching()">Find Matches</button>
+
+    <div class="result-container" id="resultContainer"></div>
+
+    <script>
+        async function startMatching() {
+            let text = document.getElementById("textInput").value;
+            let pattern = document.getElementById("patternInput").value;
+
+            if (!text || !pattern) {
+                alert("Please enter both text and pattern!");
+                return;
+            }
+
+            let resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = ""; 
+
+            let highlightedText = "";
+            let n = text.length;
+            let m = pattern.length;
+
+            for (let i = 0; i <= n - m; i++) {
+                let match = true;
+
+                // Step-by-step matching
+                for (let j = 0; j < m; j++) {
+                    if (text[i + j] !== pattern[j]) {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match) {
+                    highlightedText += text.substring(0, i) + `<span class="highlight">${text.substring(i, i + m)}</span>` + text.substring(i + m);
+                    resultContainer.innerHTML = highlightedText;
+                    await new Promise(resolve => setTimeout(resolve, 800)); // Animation delay
+                    highlightedText = "";
+                }
+            }
+
+            if (resultContainer.innerHTML === "") {
+                resultContainer.innerHTML = "No matches found!";
+            }
+        }
+    </script>
+    </p>
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="exp">
+        <h2>EXPLANTION</h2>
+        <pre>
+ Naïve String Matching is a simple algorithm used to find all occurrences of a pattern in a text. Here are the key points:
+
+ Algorithm Overview: Naïve String Matching, also known as Brute-Force String Matching, compares the pattern with all possible positions in the text.
+            
+ Step-by-Step Process:
+            
+ Start at the first character of the text and slide the pattern over it.
+ Compare each character of the pattern with the corresponding character in the text.
+ If a mismatch occurs, shift the pattern one position to the right in the text and continue comparing.
+ Repeat this process until the entire text is processed or a match is found.
+ Complexity: The worst-case time complexity of Naïve String Matching is O((n-m+1)m), where n is the length of the text, and m is the length of the pattern. It is not the most efficient string matching algorithm,
+ especially for large texts and patterns.
+            
+ Use Cases: Naïve String Matching is useful when simplicity is preferred over efficiency. It is often used for educational purposes and as a starting point for understanding more advanced string 
+ matching algorithms.
+            
+ Drawbacks: This algorithm can be slow for long texts and patterns due to its high time complexity. More advanced algorithms like KMP and Boyer-Moore offer better performance in practice.
+        </pre>
+        
+    </div>
+    
+    </section>
+
+<!-------JaveScript-------> 
+<script>
+    var navLinks=document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right="0";
+    }
+    function hideMenu(){
+        navLinks.style.right="-200";
+    }
+</script>   
+</body>
+</html>
+    
